@@ -1,0 +1,571 @@
+# $Id: CHANGELOG 1764 2016-01-14 23:12:59Z richard $
+************ ALCASAR CHANGELOG *********** 
+
+-----------------------2.9.2 -----------------------
+NEWS
+	- importation of official certificate 
+	- Configuration of Dansguardian and DNSMASQ for larger sites
+	- The SSL level has been improved to avoid recent vulnerabilities (exclude SSLV2 & V3)
+	- The autosigned certificate has been improved (key lenght : 2048b and sha256 for fingerprint algorithm)
+	- MAC auth equipments are automatically logged just after creation
+BUGS
+	- MAC auth equipments in DHCP mode are logout after lease time. They can't be automatically reconnected
+ACC
+	- PHP : migration of the deprecated functions --> should be continued for the V3
+------------------------2.9-1 ------------------------
+
+BUGS
+	- Problem with the resolver DNS at the time of the installation
+	- Configuration with external DHCP
+	- Problem with LDAP server (sradutmp is no more needed) 
+NEWS
+	- integration of an internal DNS in automatic configuration (alcasar-dns-local.sh)
+	- "SMS autoregistration" link in the 'intercept' page (if the service is enabled)
+	- It's now possible to update via ssh
+ACC
+	- show user info (name & surname) in the "activity" screen (if set)
+------------------------2.9 ------------------------
+
+BUGS
+	- Configuration radius with PAP module (remove a warning)
+	- Fix an issue when INTIF is a Gb/s card (generic-receive-offload : off)
+NEWS
+	- Mageia 4.1 migration
+	- Remove Squid - Add Tinyproxy
+	- Add the SMS auto-registration system
+	- Add whitelist filtering (domains and related IP addreses) 
+	- Add IP addresses of the Toulouse blacklist in the firewall targets
+	- Add whitelist/blacklist/antivirus filtering by users/groups
+	- Add surfmap plugin (nfsen)
+	- Store user password in SHA256 instead of MD5 (Thanks to Olivier HOUSSENBAY) and use a random SALT (not same hash for two same passwords)
+	- Add Network tool statistic : Vnstat
+	- BL/WL/Antivirus filtering now works with MAC authentication
+ACC
+	- simplify the user registration menu
+	- import a file containing a list of blacklist ip addresses or DNS names (ie : CERT)
+	- reboot or halt the system is now possible
+------------------------2.8.1 -----------------------
+BUG	- a security hole has been patch (EDB-ID: 34595 - OSVDB-ID: 111026)
+	- In the intercept page, fix the behaviour (loop) when the user writes "logout" as url
+	- correction in "session time" radius counter (thanks to Olivier HOUSSENBAY)
+----------------------- 2.8  -----------------------
+BUGS	- The file "alcasar-services" is now sorted
+	- New graphic option in grub conf file in order to fix issues with mini-itx-ATOM moterboard
+NEWS
+	- Firewall-eyes and AWstat are removed from ACC
+	- The user attribute "Max_total-time" is now "authorized period after the first connection"
+	- Creation of a netflow probe (kernel module)
+	- complete network statistics can be viewed in ACC (nfsen)
+	- The porttracker nfsen module allows to view network statistics by protocols
+	- The imputability files are now included in a single archive file (one per week)
+	- The Alcasar name includes the domain name ('localdomain' by default). We prepare the future when we will include the domain name of company.
+----------------------  2.7.2  ---------------------
+BUGS	- Modify the unit 'radiusd.service in order to wait for mysql
+	- Creation of an unit 'loadbalancing.service' instead of init.d script
+	- Removing the rc.local file
+NEWS
+	- Add fail2ban on the following attacks : ssh, https (ACC admin page), Unix accounts
+	- Creation of a security page in the ACC : fail2ban alerts, virus stopped by havp+clamav, MAC addresses bloqued by the watchdog process (usurped) 
+----------------------   2.7.1  -----------------
+BUGs
+	- Fix multi-users voucher
+	- Fix a mageia2 bug in network function
+NEWS
+	- Add 2 examples of "uamalowed and uamdomain" files with several microsoft update domains
+	- Show the blacklist category in "Acces denied" page
+	- Watchdog : don't disconnect MAC auth equipments even if they can't be reached (arping)
+----------------------   2.7  -----------------
+BUGs
+	- some corrections in the connection popup
+	- test if categories enabled of the BL are effectively in the BL (need after an update of the BL)
+NEWS
+	- Installation with Mageia2
+	- The URL filter works with the new google safesearch regex ('safe=strict' instead of 'safe=vss')
+	- The safesearch for google works now with https (redirect on 'nosslsearch' proxy)
+	- The WhiteList architecture is enabled
+	- All the documentation has been translated in english
+	- The security certificate is now signed in sha256
+	- Balancing connection is now operational and dynamically checks the Internet connectivity
+Core improvements
+	- HAVP doesn't scan youtube flows (too heavy load / no risk)
+	- voucher can now be done in multi-users 
+
+----------------------   2.6.1  -----------------
+Bugs
+	- The embedded documentation is in right version
+	- fix the dhcp static address for eth1 (intif) 
+ACC
+	- show user information when trusted equipment are listed (better than only MAC address)
+	- main page : doesn't show the date of installation in the version field (can be confused)
+Install
+	- show the GPL
+----------------------   2.6.0.1  -----------------
+Bugs
+	- the deleted library fpdf has been restored
+	- the mysqld and radiusd services are restarted when ALCASAR is launched
+----------------------   2.6   --------------------
+Bugs
+	- "username" in "userinfo" table is varchar(64) like in others tables of ALCASAR database.
+	- "activity.php" : don't print "private_ip_address". Update with new "chilli_query" output
+	- re-activation of COA between radius and coova (radius disconnect the users directly).
+	- the "url-redirect" attribute now works fine (coovachilli V.1.2.9-1)
+Core improvements
+	- all "alcasar.info" becomes "alcasar.net" in code
+	- change the order of http chain (DG --> squid --> HAVP --> Internet) more réactivity and less charge of CPU
+	- Dansguardian deny domains when requested via proxy http
+	- The database is checked (and repair) every week
+security improvements
+	- The blacklist is now verified before activating (ANSSI need)
+	- The school/parental control can now filter search engines (google, bing, yahoo, matacrowler, etc.) and Youtube 
+News
+	- When IP addresses in the consultation network are dynamicly allocated, static ip can be reserved in the Alcasar Control Center
+	- The script "alcasar-https.sh {-on|-off}" enable or disable encryption of authentication flows
+	- Exceptions of authentication (@MAC) are now managed by Radius (like other users)
+	- @network and @Host can be blocked by the firewall (conf file : etc/alcasar-ip-blocked). Alacasar Control Center is updated.
+	- the filtering of LAN between ALCASAR and the Internet GW is no more need.
+	- DHCP service is more flexible : it can be {off | half | full}
+	- ACC : admin can now export the curent tracability file
+	- ACC : admin can define the exception domains that will be showed in intercept page
+	- A new user attribute "max-all-session" is managed (maximum time a user can be connected)
+	- ACC : The english translation is more complete.
+	- clears the script "alcasar-mysql.sh --expire_user" users having an expiry date than 7 days
+	- user pages translations in portugese
+	- voucher ticket with logo of organism
+	- intercept page with exception links
+	- the needed RPM for ALCASAR can be downloaded with the new script "alcasar-rpm-dowmload.sh" 
+----------------------   2.5   --------------------
+Bugs
+	- watchdog of Daemons for service's test
+	- watchdog (and script alcasar-logout.sh) doesn't logout the macallowed addresses
+	- reading of alcasar.conf file parameters more securely
+	- don't download RPMs twice
+	- allow connexion to an LDAP server on WAN side
+	- control that watchdog can't execute if already running
+	- allow FTP in output
+	- eth1 is no more configured. Tun0 works better (only one arp cache)
+	- modoarchive is deleted (too many bugs and too hard to debug)
+Core improvements
+	- new alcasar-iptables.sh script (more logically strutured)
+	- update phpsysinfo page ("Internet access flag" nom show the right status)
+	- Authenticate user on Mysql when LDAP server is down
+	- import users via text file with or without password
+	- last version of coova-chilli
+security improvements
+	- The 8080 (TCP) and 53 (UDP) ports are now hidden on Lan side
+	- ANSSI code review (sql escape string in PHP)
+	- remove the apache unused modules
+	- the blacklist is no more update automaticly
+	- postfix banner is more secure
+	- anonymisation of squid (+ remove of 'x_forwarded' rule)
+installation improvements
+	- control eth0 config on startup (no dhcp)
+	- don't download the last BL version
+	- remove unused RPM before update the system
+	- Improve when update is performed via SSH
+News
+	- allow/deny access to the LAN located between ALCASAR and the Internet gateway (box)
+	- presentation and installation doc in english
+
+----------------------   2.4   --------------------
+Bugs
+	- some minor bugs (log rotate, intercept page, squid, ...)
+	- ACC : correction of the Internet connectivity test flag
+	- correction of the network filtering flag
+	- ip filtering exception changes doesn't active protocols exception filter
+	- remove dual log archive
+	- correction in "bypass" mode
+	- correction with squid cache
+	- The blacklist is automaticly updated once a month
+	- The distribution is automaticly updated every day
+
+----------------------   2.3   --------------------
+Bugs
+	- group properties are now written on the voucher
+	- hold the state of network filter when update
+Core improvements
+	- simplify official certificate import process
+	- update with the last version of Coova (1.2.8)
+security improvements
+	- end of implementation of ANSSI rules for netfilter
+News
+	- allow exception of IP addresses (or network addresses) in the authentication process
+	- ACC : group member is added in user list
+
+----------------------   2.2   --------------------
+Bugs
+	- A bug with "sudo" is bypassed 
+	- improve the script which display and close users open sessions
+	- some minor bugs
+Core improvements
+	- add a central conf file (/usr/local/etc/alcasar.conf)
+	- IP parameters can be change in central conf file. Apply with the script "alcasar-conf.sh -apply"
+	- 'alcasar-nf.sh' and 'alcasar-bl.sh' scripts now use the global parameters file (alcasar.conf)
+	- improve the script which managed the trusted sites and urls
+security improvements
+	- close all accounting session when the system goes down or up
+installation process improvements
+	- allow change of alcasar IP private address during install stage
+	- no more question, when upgrating
+News
+	- blacklist category "ip" is added for url that contains only an ip address (no FQDN)
+	- allow LDAP/AD connections both on WAN and LAN
+	- Add a LDAP connectivity test
+	- possibility to redirect users on a specific URL after login process
+	- if activate, sshd listen both on LAN and on WAN
+	- ACC : add the equipment name in the activity window when MAC authenticate
+
+----------------------   2.1   --------------------
+- mise en conformité du parefeu avec les préco ANSSI (politiques à DROP + sysctrl) 
+- amélioration de la fonction bastion en limitant la charge sur l'interface externe (thanks to CPN) 
+- amélioration de la gestion des RPM 'wget' au lieu de 'curl' et changement de repository en 'live'
+- exception au filtrage réseau et DNS (double instance de dnsmasq)
+- ajout d'un commentaire pour les exceptions à l'authentification
+- possibilité d'imprimer un ticket de session  et simplification des champs de saisie (thank's to Geoffroy MUSITELLI)
+- nouveau look graphique (thank's to Stéphane Erard)
+- page de status via JSON (thank's to Stéphane Weber)
+- intégration du filtrage 'safesearch' (filtrage des réponses des moteurs de recherche).
+- installation à partir d'un mandriva 2010.2
+- diminution des ressource système (travail d'HAVP en mémoire plutôt que sur le disque)
+- distinction des fichiers de log (traçabilité - ssh - accès exterieur)
+- amélioration du processus de mise à jour (prise en compte du numéro de version)
+
+---- 2.0.1 ----
+- simplification du processus de mise à jour (prise en compte mdv 2010.2)
+- déplacement du répertoire 'digest' vers /usr/local/etc/
+- correction horodatage des logs awstat
+- inclusion d'un fichier de nommage DNS local
+- inclusion d'un fichier 'alcasar-ethers' permettant la réservation d'adresses IP par Dnsmasq
+- inclusion d'un fichier 'alcasar-dns-name' permettant de définir des associations @IP <--> DNS par Dnsmasq
+- qq bugs mineurs (ntpd, adresse coova 1.0.0.0, etc.)
+
+---- 2.0 ----
+- mise à jour de la documentation technique
+- ajout des switchs en '--' pour remplacer les '-' des scripts
+- accès authentifié à la la page de garde du centre de gestion
+- Prise en compte du script "alcasar-iptables-local.sh" dans le cadre du ByPass
+- Prise en compte des catégories de la BL dans l'interface de gestion
+- prise en compte par le watchdog de la redirection usager si panne eth0 ou panne default-gw
+- Simplification de la procédure de mise à jour
+- Intégration du filtrage de domaine via dnsmasq (DNS-blackhole)
+- suppression de named du script d'alcasar
+- Intégration des blacklists de dansguardian et formatage pour dnsmasq
+- Intégration de la migration du système de la Mandriva
+- Intégration de dnsmasq en lieu et place de named et dhcpd ( en mode normal) en bypass dhcpd et toujours présent ...
+- Prise en charge du fichier alcasar-iptables-local.sh dans l'update
+
+---- 1.9 ----
+- Adaptation de DHCPD dans les scripts de demarrage
+- Mise en place du DHCPD local en lieu et place de DHCP Chilli : "alcasar.sh"
+- Ajout de la gestion des quotas sur les usagers et groupe d'usagers.
+- Interdiction de créer des usagers ou groupes avec un nom vide ou contenant des espaces
+- création RPM 32b et 64b d'havp. Adaptation des scripts.
+- intégration havp + clamav
+- remplacement de valeur DNS1 et DNS2 quand valeur= vide ; testé
+- Réécriture de la procédure d'installation des RPM (téléchargement et test avant install)
+- protection du menu "grub"
+- Fusion menus "services" et "réseau"
+- "page de garde" : simplification + Info sur le filtrage + optimisation
+- "menu.php" : prise en compte version 'actuelle' et 'MAJ" dans la page de menu
+- prise en compte version 'stable' et 'devel" dans la page de garde
+- correction bug (adresse en 0.0.0.0 du menu activité)
+- mise en place des properties svn avec $Revision  $Date
+- mise en place des exceptions au filtrage (web + réseau). Correction bug utf8.
+- "alcasar.sh" : modif config carte eth0 (dns local et ifcfg-eth0.default) 
+- bascule du développement sur subversion
+- "alcasar.sh" : debug de la partie "mise à jour" + ajout de la zone reverse (localdomain.rev)
+- "alcasar.sh" : correction config coova (les DNS sont pré-renseignés dans la conf par défaut). Ajout de l'entrée "alcasar" dans la zone DNS "localdomain"
+- "alcasar.CA" : renommage des "OU" et préparation d'un deuxième certificat serveur pour le CN "alcasar"
+- "alcasar.sh", "alcasar-conf.sh" : procedure externe pour créer l'archive des fichiers de conf
+- "alcasar.sh", "alcasar-uninstall.sh", "alcasar-CA.sh", "alcasar-conf.sh" : réécriture de la procédure de mise à jour
+- "alcasar-iptables.sh" : suppression DNS sur TCP (uniquement UDP)
+- "alcasar-urpmi.sh" : prise en compte de la "mirrorlist" centralisée chez Mandriva
+- "alcasar.sh" : suppression des daemons ifplugd associés à chaque carte réseau (mii_not_suported=yes)
+- durcissement de l'entrée du nom d'organisme (pour les 2 mains gauches ;-)   )
+- "service.php" : ajout du service "named"
+- "alcasar-iptables.sh" : rajout des redirections et autorisations tcp domain dans parefeu 
+- "alcasar.sh"		 : activation du DNS bind   [install uninstall(alcasar-uninstall.sh) et update]
+- "intercept.php" : intégration de la variable "userurl" dans les arguments de la demande d'authentification afin que la page demandée par l'usager soit prise en compte par le cache ARP de chilli (et donc affichée après l'authentification) ouf...  ;-)
+- "intercept.php" : suppression caractères superflus ("\"). Ajout variable "urladmin" : permet de choisir la page chargée après authentification
+- "alcasar.sh" : fonction 'chilli' -> creation du fichier d'exception par @mac (alcasar-macallowed)
+- "menu.php", "auth.php", "filtering.php" : modification du menu
+- "exception.php" : intégration php de la gestion des exceptions par @MAC + traduction
+- "alcasar-iptables-filter.sh" : correction bug sur le nom du chemin du fichier ligne 30 
+- "alcasar-iptables.sh" : intégration Bind ( mais non activé )
+- "alcasar.sh" : + intégration de Bind ( mais non actif pour le moment )
+- Intégration de param_bind dans menu -install et -update
+- ln et modification de /etc/trusted_network_acl.conf ( LAN autorisé à query )
+- radius et update RPM : --> suite aux problèmes d'update RPM ( à affiner si suppression de certains modules radius ( rlm_, etc...)
+- rajout/modification de droits msec sur /etc/raddb 
+- touch sur control-socket, default et inner-tunnel sous /etc/raddb/site-enabled (ln rajoutés par un update RPM de freeradius systématiquement ... et qui empêche le démarrage de radius)
+- "alcasar.sh" : mise à jour de l'install ntpd ("ntpdate" étant devenu obsolète)
+- "alcasar-uninstall.sh" : suppression des spécificités de la V1.7
+- intercept.php : correction bug (compatibilité ie8).
+- mise à jour du répertoire "conf/rpms-update" (rpm de "mindi" compatible ext4) 
+- "alcasar-mondo.sh" : correction proposée par Michel GAUDET
+- ajout du processus "sshd" dans la page "système/services".
+- "alcasar-radius" : suppression des tags config- de l'ancien plugin ldap.
+- "alcasar.sh" : augmentation de la taille des fichiers en "upload" par php (pour l'import de la base usager)
+- le service sshd n'est plus lancé automatiquement au démarrage (activable via l'interface de gestion)
+- "alcasar-iptables-filter.sh : a voir avec richard pour les conntrack modules pour ftp ...
+- "menu.php, filtering.php, activity.php" : prise en compte des @mac autorisée dans la fenêtre "activité" (+ corrections)
+
+---- 1.8 ----
+- "alcasar-bypass.sh" : amélioration du script
+- création des 2 scripts d'initialisation des daemons "chilli" et "dansguardian"
+- "alcasar.sh" et "alcasar-uninstall.sh" : création de la fonction "dansguardian"
+- "alcasar.sh" : intégration du RPM "coova-chilli" réalisé par Mandriva.
+- mise à jour des docs
+- "alcasar-iptable-bypass.sh" : adaptation à la dernière version de netfilter.
+- "alcasar-iptable-filter.sh" : traitement du filtrage ICMP
+- "alcasar.sh" : désactivation par défaut du filtrage WEB et du filtrage réseau
+- "alcasar-iptables.sh" + "alcasar-iptables-filter.sh" : optimisation des règles de filtrage. 
+- ajout du charset (utf-8) dans intercept.php
+- adaptation de phpsysinfo : (portail.php, index.php, fr.php et en.php)
+- "alcasar-CA.sh" : suppression des caractères superflus lors de la génération du certificat de l'A.C.
+- "service.php" : mise en conformité graphique
+- mises à jour network.php (internationnalisation et suppression des erreurs php)
+- alcasar-urpmi.sh et alcasar.sh : adaptation de la procédure de mises à jour pour les architectures 64b
+- mises à jour des fichiers de la partie "système" du centre de gestion (internationalisation, utf8... partie à finaliser...)
+- intégration de la page activité dans "système/réseau" et adaptation du menu
+- adaptation du code aux évolutions php5 (fonction "split" dépréciée, fonction "new" retourne directement une valeur, variables _get et _post interdites de visibilité globale)
+- fichiers modifiés : intercept.php, uam.php, net-filter.php, bl.php, bl2.php, sauvegarde.php, 15 fichiers de phpsysinfo, to be continued ...
+- "alcasar.sh" : adaptation pour le module 'ldap') :
+- "alcasar.sh" : adaptation à MdV-2010, corrections : log_martians, lancement des fonctions, rpm orphelins 
+- tri des services, amélioration des fonctions php d'ouverture de fichiers (bl + wl)
+- prise en compte d'une whitelist par protocole autorisé (création du fichier /usr/local/etc/alcasar-services)
+- "alcasar.sh" : suppression de l'écoute sur le port 80. Suppression du filtrage ultrasurf. Evolution de la gestion du filtrage (alcasar-nf.sh + modules php)
+- "alcasar.sh conf/logrotate.d/dansguardian" - adaptation de dansguardian dans la rotation des logs et modif du script alcasar.sh
+- "alcasar.sh" : suppression du filtrage des fichiers téléchargés, mise à jour système automatique, modif page d'erreur apache "401", limitation de l'écoute d'apache sur le port 443 (eth1)
+- "alcasar-unistall.sh : mise à jour
+- Modification du menu de centre de gestion : ajout menu systeme(services/réseau/ldap)
+- Ajout des pages de configuration des Services, Réseau et LDAP.
+- "alcasar.sh" : modification des msec local (perm.local) --> prise en compte de l'interface ldap --> a confirmer
+- "alcasar.sh" : adaptation des délais pour anacron 
+- "alcasar-iptables-filter.sh" : debug de la ligne de récupération des @IP ultrasurf
+- "alcasar-iptables.sh" : adaptation des règles à la nouvelle norme d'écriture (le "!" placé avant)
+- "alcasar.sh" : adaptation du module "radius" pour mandriva 2009.0 & 2009.1
+- "alcasar.sh" : suppression du filtrage d'URL via les expressions régulières (REGEX) pour dansguardian
+- prémices de l'interface de filtrage réseau (alcasar-nf.sh + modules php)
+- "alcasar.sh" : génération de mot de passe aléatoire au sein des briques Alcasar même après une mise à jour.
+- mise à jour de "mondoarchive" et "mindi" dans l'archive des RPM (alcasar-1.8-rpms.tar.gz)
+- "alcasar.sh" : modif de la conf dansguardian (afin de préparer l'interfaçage graphique)
+- 'alcasar-uninstall.sh" : mise à jour et désinstallation complète de mysql
+- "alcasar.sh" : pour Dansguardian, on désactive le contrôle dans l'URL, on bloque les URL avec @IP, on bloque le https par le port 80
+- "sauvegarde.php" : suppression de l'affichage des journaux du proxy
+- ajout de 3 RPMs liés au "backportage" de "mondo-mindi"
+- "alcasar.sh" : ajout des cron.d/export et clean pour une prise en compte en cas d'arrêt du serveur pendant l'exécution
+- "alcasar.sh" : suppression des # dans le plugin_ldap ( ne prend pas en compte le lancement multiple ...
+- "alcasar-log-export.sh, alcasar-log-clean.sh, conf/logrotate.d/dansguardian" : prise en compte des logs de dansGuardian ... dans les exports de logs et le nettoyage # a voir si on garde ?
+- "alcasar.sh" : prise en compte de la tabulation avant et derrière le # dans radiusd.conf
+- "alcasar-mondo.sh" : suppression du paramètre -F qui crash sur la Mandriva 2009.1
+- "alcasar-bl.sh" : mise à jour des liens internes liés au téléchargement de la BL Toulouse 
+- "phpsysinfo" : activation de la barre de charge (load-bar) dans la page d'accueil
+- correction bug : affichage des exceptions (bl.php) et sauvegarde du fichier "/etc/dansguardian/exceptioniplist" en cas de mise à jour 
+
+--- 1.8a ---
+- modif du système de comptage des usagers en ligne de la page d'accueil (chilli_query au lieu de radwho)
+- amélioration de la fonction de mise à jour
+- définition aléatoire des mots de passe inter-processus (alcasar.sh)
+- réécriture des règles iptables pour prévenir l'impossibilité future de filtrer sur la table NAT (alcasat-iptables.sh)
+- possibilité de garder l'ancien certificat serveur lors de la mise à jour
+- installation de dialupadmin + conforme (uniquement les fichiers modifiés)
+- réarchitecture des pages du centre et homogénéisation graphique.
+- correction javascript dans la page d'interception
+- possibilité de supprimer les usagers à la suppression de leur groupe
+- correction faille de conf apache (suppression de la directive "method")
+- gestion des profils d'administration en 3 groupes (admin, manager, backup)
+- correction de la "double redirection" lors de l'interception par coova
+- suppression de la fonction "OnBlur" de intercept.php
+- amélioration de la conf de squid (suite au remplacement de squidGurad par Dansguardian)
+- amélioration de la rubrique "activité réseau" (affichage trié et déconnexion d'un usager (même si plusieurs sessions simultanées)
+- modification des menus de l'interface
+- correction d'un bug et "durcissement" de la conf de coova-chilli à l'install (alcasar.sh)
+- remplacement "hotspotlogin.cgi" par "intercept.php". Traduction en 5 langues. Prise en compte des réponses Radius.
+- simplification des scripts de modification du mot de passe usager (+ traduction 5 langues)
+- affichage du nom d'organisme sur la page d'interception
+- correction de bug dans "alcasar.sh" : appel de 'htdigest' par son chemin complet, amélioration des calculs pour les réseaux de classe A et B, procédure de mise à jour (option -update)
+- correction du fichier "dhcpd.conf" (ajout de l'entrée "ddns-update-style interim")
+- correction et agrégation des 2 scripts "alcasar-bypass-on / off"
+
+--- 1.7 ---
+- intégration du module de filtrage applicatif
+- traitement des vpn https "ultrasurf" (contournement du filtrage d'URL)
+- mise en conformité de l'interface des sites de confiances ("uamallow" et "uamdomain")
+- mise à jour de la doc
+- module graphique de visualisation de l'activité du réseau de consultation (équipements et usagers)
+- correction bug "sauvegarde.php"
+- correction bug freeradius-web/lib/sql/drivers/mysql/functions.php (merci M.G.)
+- adaptation cron de chilli à notre logique (/etc.cron.d au lieu de /var/spool/cron/root)
+- suppression des mails pour les cron journaliers (awstat, chilli, etc.)
+- modification radius (écriture dans sradutmp et radutmp) --> récupération de la fonction "radwho"
+- relooking type Alcasar de "accounting.php" et suppression d'affichage des champs "NAS*"
+
+--- 1.7-rc4 ---
+- recodage UTF8 alcasar.sh, alcasar-iptables, etc.
+- modif alcasar-iptables (le "/etc/init.d/iptable save" est réalisé ici) et alcasar-iptables-filter (ancien alcasar-iptables-local) en vue d'intégrer le filtrage applicatif.
+- agrégat uam.php + uam2.php (suppression uamallow.php et alcasar-uamallow.sh)
+- sécurisation /etc/pki
+- modification et intégration du fichier de conf "radiusd.conf" + conforme
+--> gestion de la casse pour les noms d'usager
+--> suppression des méthodes d'authentif inusitées
+--> activation des compteurs SQL (module rlm_sqlcounter.so)
+- remplacement "ssmtp" par "postfix" afin de préparer l'avenir ;-)  et d'éviter les erreurs de "crond"
+- création et mise en ligne de l'archive des RPMs additionnels pour les installation "faible débit"
+- phpsysinfo : nom de la distribution de nouveau disponible (phpsysinfo/distro.ini <-- Mandrivalinux au lieu de Mandriva)
+- adaptation de admin/uam.php ( et uam2.php) pour génération web des urls et domaines de confiance
+- suppression de shorewall-common et pas uniquement shorewall
+- intégration dans /etc/chilli/config de alcasar-uamallowed et alcasar-uamdomain (fichiers de sites et de domaines de confiance)
+- modif de alcasar-iptables.sh pour permettre l'icmp sur INTIF et pas seulement sur TUNIF
+- modif alcasar-uamallowed.sh pour intégrer un fichier alcasar-uamdomain ( domaines sans restriction)
+- modif "sauvegarde.php" pour ordonner la liste des sauvegardes (base, firewall, système)
+- modif "hotspotlogin" pour intégrer un traitement à la fermeture du popup de déconnexion
+- modif /etc/alcasar-bypass.sh en /usr/local/bin/alcasar-iptables.bypass.sh
+- modif alcasar-bypass-local.sh pour intégrer des filtres applicatifs + déplacement dans alcasar-iptables.sh
+- intégration coova "+ conforme" (modif du fichier de conf par défaut)
+- suppression des modifs iptables effectuées par coova (/etc/chilli/up.sh)
+- ajout du contrôle des flux DNS (pour éviter les tunnels DNS)
+- remplacement de la page d'interception de dansguardian
+- intégration du module LDAP dans /etc/raddb et alcasar.sh
+
+--- 1.7-rc3 ---
+- Correction bugs dans "alcasar-log-export"
+- Suppression des broadcast sur EXTIF
+- Suppressions des envois de mail pour cron (générait une erreur en absence de MTA)
+- correction config awstat et intégration graphique
+- intégration Squid "+ conforme" (modif du fichier de conf par défaut)
+- suppression du snmp_finger inutile dans "/etc/freeradius-web/admin.conf"
+- correction du bug mktime() de la page "stat journalière"
+- modif menu pour les pages "stats journalières" et "stat usagers"
+- correction bug de la page des connexions actives ("sradutmp" dans "/etc/raddb/site-available/alcasar" et @IP réelle du NAS (et non loopback))
+- intégration du plugin ldap : les scripts php ne sont pas retenus (mais conservés).
+- implémentation et adaptation pour authentification seule (pas de récupération des attributs Radius dans ldap )
+- ajout de la commande service dans sudoers ; pourra ètre utile pour insérer l'état des services utiles (status et restart) dans phpsysinfo
+- ajout des fichiers modifiés ldap.attrmap et ldap (sera modifié par le script plus tard :-) issus de freeradius-ldap
+- modification du fichier d'installation alcasar.sh pour rajouter une option -ldap indépendante de l'install/update et uninstall
+
+--- 1.7-rc2 ---
+- correction de code php afin de supprimer les warnings dans /var/log/http/ssl_error
+- correction de quelques coquilles
+- intégration de la gestion des sessions simultanées
+- correction bug dans la page d'info usager - rubrique "password-check" (freeradius-web/lib/sql/password_check.php)
+- intégration du travail de P.Romero (générateur de mots de passe aléatoires dans htdocs/user_new.php et htdocs/user_edit.php)
+- suppression des log_martian via msec -> fichier /etc/security/msec/level.local (alcasar.sh)
+- ajout des RegEx de saisie d'adresse IP (alcasar.sh)
+- création du script de gestion des profils "alcasar-profil.sh", adaptation d'alcasar.sh
+- correction bug sauvegarde.php : répertoire "/var/Save/log/proxy" au lieu de "/var/Save/log/squid",
+- correction d'un bug dans le fichier de conf d'awstat
+- ajout de la possibilité de changer le plan d'addressage à l'install, correction bugs date d'installation + install via archive RPM
+
+--- 1.7-rc1 ---
+- intégration page uamallowed, modification du menu, lien symbolique /etc/radius/radutmp sur /etc/radius/sradutmp (pour radwho --> à revoir), vérif mdp chiffré dans mysql --> ok.
+- modif archive RPMS, iptables, squid.conf (pour ce dernier, on devrait pouvoir partir du fichier de conf de base)
+- suppression des paquetage avahi, mandi, shorewall, drakxtool-curses et les orphelins créés (à la fin de l'install)
+- création de l'archive rpm optionnel "alcasar-rpms.tar.gz" (nécessaire quand on a pas Internet (dans le train par exemple ;-)  ))
+- déplacement de /etc/chilli/defaults en /etc/chilli/defaults.old pour éviter les uamallowed insérés automatiquement par coova
+- modif import-user.php, déplacement dans freeradius-web/htdocs (en import_user.php) et modif page d'appel (usager.php)
+- correction des requetes SQL sur la table "usergroup" au lieu de "radusergroup" (import_user.php et portail.php). Correction du MCD.
+- suppression de l'affichage du logo "coova" (/etc/chilli/config)
+- suppression des log parefeu https, ssh et dhcp (les logs des daemon httpd, sshd et coova suffisent)
+- suppression de la modif du fichier syslog.conf à l'install
+- mise à jour de la page d'interception (hotspotlogin)
+- mise à jour alcasar-uninstall, config ssh, alcasar-bypass-iptables
+- affectation dynamique du role des cartes RSO (alcasar.sh)
+- correction de bugs (alcasar-iptables.sh + alcasar.sh)
+- généralisation de l'utilisation des variables "intif" et "extif" dans le script d'install
+- prise en compte des nouvelles structure des RPM repository (alcasar-urpmi.sh)
+- adaptation du script d'install en mandriva 2009
+- intégration native de coova-chilli
+
+--- 1.7 ---
+- Suppression de l'enregistrement du mot de passe dans la table "radpostauth"
+- intégration dans alcasar.sh à l'installation-update
+- intégration structure ossi-bl et ossi-wl dans squidGard.conf et alcasar.sh --> reste dans script web
+- intégration de coova-chilli en substitution à chillispot ;  reste à intégrer dans alcasar.sh à l'installation-update
+- modif import_user.php :
+- remontée de import_user.php à la racine du centre de gestion ; modification dans les différentes interfaces dont les menus
+- sortie sur un fichier unique  ; reste à récupérer par le biais de l'interface
+- modif chilli.conf : interval=0 (évite le relancement de chilli toute les heures)
+
+--- 1.6 ---
+- Durcissement du parefeu (fermeture de ports) et adaptation des règles à l'interface "firewalleyes"
+- Simplification de la structure des fichiers de sauvegardes (/var/Save)
+- Mise à jour du fichier de configuration squidGuard (intégration de tous les domaines de la BL de Toulouse)
+- Séparation des RPM additionnels de l'archive du portail
+- Réécriture du script de génération des certificats de l'A.C et du serveur WEB
+- Automatisation de la procédure de mise à jour
+- Amélioration de l'interface de gestion :
+	- Meilleure intégration graphique et francisation
+	- Prise en compte des créneaux horaires, de la durée des sessions et de la date d'expiration du mot de passe
+	- Suppression du menu certificat (intégration dans la page d'accueil)
+	- Refonte de la page de gestion des blacklists et rationalisation des scripts php associés
+	- Import d'usagers (à partir d'un fichier texte ou d'une base complète) et RAZ de la base
+- Déconnexion des usagers par ALCASAR (radiusd + chilli) et non plus seulement par le navigateur WEB (paramètre 'coaport')
+- Modification squid.conf (compatibilité toute distrib MDV).
+- Simplification du module de création de l'image système (alcasar-mondo.sh).
+- Correction des bugs suivants :
+	- Disparition des statistiques de consultation web après une mise à jour
+	- Deconnexion d'un usager à partir de l'interface de gestion
+	- possibilité de créer des groupes vides (en fait avec un usager virtuel portant le même nom que le groupe).
+- Création des scripts alcasar-bl.sh (activation/désactivation/mise à jour du filtrage), alcasar-logout.sh (déconnexion des usagers) et alcasar-mysql (import usagers via txt et sql + raz de la base).
+
+--- 1.5 ---
+- prise en compte du nom de baptême du portail : ALCASAR
+- intégration d'un script PHP permettant de personnaliser le logo
+- intégration du contournement du bug 'MSIE' pour les pages gestion.
+- Intégration de l'interface PHP d'informations système ( phpsysinfo) et ajout d'un module Alcasar (nbr.usagers, version d'installation, version de la blacklist, @IP publique).
+- Réécriture des scripts d'install et de désinstall (alcasar-uninstall.sh)
+	- intégration d'un test de connectivité à Internet
+	- réorganisation des fonctions
+	- création de l'option 'uninstall' permettant de désinstaller complétement le portail (afin de pouvoir lancer des séquences d'install/désinstall pour les tests)
+	- permettre le choix du nom pour les comptes autorisés à administrer le portail
+- Réécriture de la page de gestion et intégration des fonctionnalités nouvelles suivantes :
+	- mise à jour de la blacklist squidGuard (globale + OSSI)
+	- sauvegarde à chaud du système, sauvegarde des logs et de la base usagers
+	- visu des logs du parefeu
+- Modification du fichier sudoers permettant le lancement des commandes via la page de gestion
+- Ajout de l'option -update pour mettre à jour le portail déjà installé (option compatible avec versions >= 1.5)
+- Amélioration des règles du pare-feu (moins de Logs mais plus pertinents)
+- Gestion des erreurs 404 d'apache par une redirection sur la page d'accueil
+- Possibilité de changer son mot de passe via la page de connexion et la page de gestion
+- Correction des bugs suivants :
+	- la comptabilité utilisateur dans dialupadmin est de nouveau fonctionnelle
+	- l'export chaque semaine de la base des utilisateurs est de nouveau fonctionnel
+	- homogénéisation de la gestion des cron ==> tout dans /etc/cron.d/
+	- déplacement de la structure d'awstat pour permettre la visu complète des pages (var/www/awstats -> /var/www/html/awstats)
+- Intégration d'une interface PHP de lecture des log du parefeu ( firewallEyes )
+- Implémentation du certificat gnupg pour le chiffrement éventuel des logs
+- Modification mineure du script de génération à chaud d'image système (alcasar-mondo.sh)
+- Modification des pages de dialupadmin ( francisation, simplification, etc.)
+- Intégration dans le fichier archive des rpms supplémentaires et de la blacklist (évite leur téléchargement par internet)
+--- 1.4 ---
+- Réécriture du script de mise à jour de la blacklist squidGuard
+- Uniformisation du script d'install
+- Correction du script de désinstallation (alcasar-uninstall.sh) et de sauvegarde de la base radius (alcasar-mysql.sh)
+- Mise en place d'une page WEB d'accueil pour la gestion du portail
+- Suppression des cgi-bin installés par défaut
+--- V1.3 ---
+- Création d'une structure 'OSSI' dans la blacklist SquidGuard
+- Modification de la page d'interception SquidGuard.
+- Anonymisation de la structure LAN dans les trames traitées par Squid (forward_for off dans squid.conf).
+- Correction de la fonction 'bypass'.
+- Mise en place de la possibilité de chiffrer les logs (par gnupg).
+- Correction du mot de passe dans le script d'export lorsqu'il est changé à l'install.
+- Correction de la structure d'archivage et prise en compte du contenu des fichiers à sauvegarder.
+- Mise en place du cron de sauvegarde des configurations.
+
+--- V1.2 ---
+- Consolidation de la fonction de désinstallation (création systématique de fichiers '.default' lors de modification)
+- Configuration des services lancés au démarrage (chkconfig).
+- Françisation du CGI "hotspotlogin" (codage des accents).
+- Possibilité de lancer le script sans argument (-all par défaut).
+- Suppression des "Logs Martians".
+
+--- V1.1 ---
+- Consolidation de la variable FIC_PARAM.
+- Suppression de la déclaration des DNS dans le fichier de conf de chilli (on s'appuie sur les DNS locaux définis dans "/etc/resolv.conf").
+- Modification de la page d'authentification (plus générique).
+- Réorganisation de la structure de l'archive d'install.
+- Modification des directives de chiffrement d'apache (SSLRequireSSL).
+
+--- V1.0 ---
+- Version initiale que l'on trouve déjà excellente ;-)

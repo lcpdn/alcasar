@@ -1,0 +1,16 @@
+                   *******************************
+                   **** Licence d'utilisation ****
+                   *******************************
+
+ALCASAR est un logiciel libre
+
+Avant de l'installer, vous devez accepter les termes de sa licence 'GPL-V3'
+Le descriptif de cette licence est disponible dans le fichier 'GPL-3.0.txt'
+Une traduction française est disponible dans le fichier 'GPL-3.0.fr.txt'.
+
+Les objectifs de cette licence sont de garantir à l'utilisateur : 
+- La liberté d'exécuter le logiciel, pour n'importe quel usage ;
+- La liberté d'étudier et d'adapter le logiciel à ses besoins ;
+- La liberté de redistribuer des copies ;
+- L'obligation de faire bénéficier à la communauté les versions modifiées.
+

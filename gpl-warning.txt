@@ -1,0 +1,15 @@
+                   *******************************
+                   ****      User License     ****
+                   *******************************
+
+ALCASAR is an open source software
+
+Before install it, you must understand and accept the license 'GPL-V3'
+you can read this license in the file 'GPL-3.0.txt'
+
+The goals of this license are :
+- the freedom of using the software ;
+- the freedom of studying et adapting it for its own uses ;
+- the freedom of redistributing copies of it ;
+- the compulsory of giving the modify versions to the community
+
