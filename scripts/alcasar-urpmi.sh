@@ -12,47 +12,7 @@ Lang=`echo $LANG|cut -c 1-2`
 VERSION="4"
 ARCH="i586" 
 # ****** Alcasar needed RPMS - paquetages nécessaires au fonctionnement d'Alcasar ******
-PACKAGES="vim-enhanced freeradius freeradius-mysql freeradius-ldap freeradius-web apache apache-mod_ssl 
-apache-mod_php
-dansguardian
-postfix
-mariadb
-ntp
-bind-utils
-openssh-server
-php-xml
-php-ldap
-php-mysql
-php-mysqli
-php-mbstring
-php-sockets
-php-cli
-php-curl
-php-pdo_sqlite
-php-json
-rng-utils
-rsync
-clamav
-perl-rrdtool
-perl-MailTools
-perl-Socket6
-fail2ban
-gnupg
-ulogd
-dkms-ipt_NETFLOW
-iptables-NETFLOW
-pm-fallback-policy
-ipset
-cronie-anacron
-gammuusbutils
-locales-en
-usb_modeswitch
-tinyproxy
-vnstat
-php-gd
-sudo
-iftop
- "
+PACKAGES="vim-enhanced freeradius freeradius-mysql freeradius-ldap freeradius-web apache apache-mod_ssl apache-mod_php dansguardian postfix mariadb ntp bind-utils openssh-server php-xml php-ldap php-mysql php-mysqli php-mbstring php-sockets php-cli php-curl php-pdo_sqlite php-json rng-utils rsync clamav perl-rrdtool perl-MailTools perl-Socket6 fail2ban gnupg ulogd dkms-ipt_NETFLOW iptables-NETFLOW pm-fallback-policy ipset cronie-anacron gammu usbutils locales-en usb_modeswitch tinyproxy vnstat php-gd sudo iftop"
 
 rpm_repository_sync ()
 {
